@@ -5411,6 +5411,10 @@ MediumEditor.extensions = {};
                 return;
             }
 
+            if (event.target.tagName.toUpperCase() === 'INPUT' || event.target.tagName.toUpperCase() === 'TEXTAREA') {
+                return;
+            }
+
             event.stopImmediatePropagation();
 
             this.removePasteBin();
