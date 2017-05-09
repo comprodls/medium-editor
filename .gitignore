@@ -13,3 +13,6 @@ coverage/
 
 # IDE
 .idea/
+
+#Bower installation directory
+bower_components/

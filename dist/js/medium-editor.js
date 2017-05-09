@@ -6547,6 +6547,8 @@ MediumEditor.extensions = {};
     MediumEditor.extensions.imageDragging = ImageDragging;
 }());
 
+/*global $ */
+/*global autosize */
 (function () {
     'use strict';
 
@@ -6741,7 +6743,24 @@ MediumEditor.extensions = {};
             if (tagName === 'a') {
                 this.options.ownerDocument.execCommand('unlink', false, null);
             } else if (!event.shiftKey && !event.ctrlKey) {
-                this.options.ownerDocument.execCommand('formatBlock', false, 'p');
+                if (event.target.tagName.toUpperCase() === 'INPUT' || event.target.tagName.toUpperCase() === 'TEXTAREA') {
+                    if (event.target.tagName.toUpperCase() === 'INPUT') {
+                        $(event.target).blur();
+                    } else {
+                        autosize($(event.target));
+                    }
+                } else {
+                    this.options.ownerDocument.execCommand('formatBlock', false, 'p');
+                }
+            }
+        } else {
+            if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+                if (event.target.tagName.toUpperCase() === 'INPUT' || event.target.tagName.toUpperCase() === 'TEXTAREA') {
+                    if ($(event.target).text()) {
+                        $(event.target).val($(event.target).text());
+                        $(event.target).text('');
+                    }
+                }
             }
         }
     }

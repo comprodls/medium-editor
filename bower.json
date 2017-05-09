@@ -7,6 +7,10 @@
     "Noah Chase <nchase@gmail.com>",
     "Jeremy Benoist <jeremy.benoist@gmail.com>"
   ],
+  "dependencies": {
+    "jquery": "2.1.3",
+    "autosize": "3.0.20"
+  },
   "description": "Medium.com WYSIWYG editor clone written in pure JavaScript.",
   "main": ["dist/js/medium-editor.js",
            "dist/css/medium-editor.css",
