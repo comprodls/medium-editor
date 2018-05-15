@@ -55,10 +55,20 @@
     }
 
     function handleBlockDeleteKeydowns(event) {
-        var p, node = MediumEditor.selection.getSelectionStart(this.options.ownerDocument),
+        var p, $equation, node = MediumEditor.selection.getSelectionStart(this.options.ownerDocument),
             tagName = node.nodeName.toLowerCase(),
             isEmpty = /^(\s+|<br\/?>)?$/i,
             isHeader = /h\d/i;
+
+        $equation = $(event.target).is('equation') ? $(event.target) : $(event.target).closest('equation');
+
+        if ($equation.length) {
+            if (MediumEditor.util.isKey(event, MediumEditor.util.keyCode.ENTER)) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+            }
+        }
 
         if (MediumEditor.util.isKey(event, [MediumEditor.util.keyCode.BACKSPACE, MediumEditor.util.keyCode.ENTER]) &&
                 // has a preceeding sibling
